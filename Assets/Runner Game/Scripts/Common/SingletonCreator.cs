@@ -11,7 +11,7 @@ public class SingletonCreator<T> : MonoBehaviour where T:MonoBehaviour
         get => instance;
         set => instance = value;
     }
-    private void Awake()
+    protected virtual void Awake()
     {
         if (instance != null && instance != this) 
         {
@@ -19,6 +19,6 @@ public class SingletonCreator<T> : MonoBehaviour where T:MonoBehaviour
             return;
         }
         instance = GetComponent<T>();
-        DontDestroyOnLoad(instance);
+        //DontDestroyOnLoad(instance);
     }
 }

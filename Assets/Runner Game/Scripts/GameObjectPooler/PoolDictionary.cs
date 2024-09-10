@@ -25,6 +25,7 @@ public class PoolDictionary : MonoBehaviour
 			for (int i = 0; i < item.Size; i++)
 			{
 				GameObject gmo = Instantiate(item.Prefab);
+				gmo.name = item.Prefab.name;
 				gmo.SetActive(false);
 				if (parent != null) 
 				{
