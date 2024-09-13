@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CommonVariables;
 
 public class BarrierSpawner : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BarrierSpawner : MonoBehaviour
     [SerializeField] float maxTimeOut;
     [SerializeField] PlayerController player;
     [SerializeField] float pointZOffset;
+    [Range(0f, 1f)]
+    [SerializeField] float coinPercent;
     #endregion
     #region Fields
     private Vector3 _pos = Vector3.zero;
@@ -34,7 +37,19 @@ public class BarrierSpawner : MonoBehaviour
         while (true) 
         {
             yield return new WaitForSeconds(Random.Range(minTimeOut, maxTimeOut));
-            CreateGameObjects.Instance.CreateGameObject(_barrierName, spawnPoints[Random.Range(0, spawnPoints.Length)].position, null);
+            var result = Random.Range(0f, 1f);
+            if(result > coinPercent)
+            {
+                CreateObject(SpawnedObjects.Barrier);
+            }
+            else
+            {
+                CreateObject(SpawnedObjects.Coin);
+            }
         }
+    }
+    private void CreateObject(SpawnedObjects spawnedObject)
+    {
+        CreateGameObjects.Instance.CreateGameObject(spawnedObject.ToString(), spawnPoints[Random.Range(0, spawnPoints.Length)].position, null);
     }
 }

@@ -5,6 +5,11 @@ using Boxophobic.StyledGUI;
 
 public class StyledLabelGizmo : StyledMonoBehaviour
 {
+#if UNITY_2021_2_OR_NEWER
+    [StyledMessage("Warning", "The styled label gizmo is not supported in Unity 2021.2 or newer!", 10, 10)]
+    public bool message = true;
+#endif
+
     public Transform basePosition;
     public Transform labelPosition;
 
@@ -24,6 +29,7 @@ public class StyledLabelGizmo : StyledMonoBehaviour
     [TextArea]
     public string labelText;
 
+#if !UNITY_2021_2_OR_NEWER
     bool pingable;
 
     void OnDrawGizmos()
@@ -107,5 +113,6 @@ public class StyledLabelGizmo : StyledMonoBehaviour
 
         Handles.EndGUI();
     }
+#endif
 }
 #endif
