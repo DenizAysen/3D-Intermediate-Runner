@@ -10,5 +10,9 @@ public class PlayerCollector : MonoBehaviour
         {
             colletible.Collected();
         }
+        if(collision.gameObject.TryGetComponent<IObstacle>(out var obstacle))
+        {
+            obstacle.Hit();
+        }
     }
 }

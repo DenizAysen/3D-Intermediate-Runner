@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,34 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Unity Methods
+    protected virtual void Awake()
+    {
+        isControlEnabled = false;
+        isPlayedDead = false;
+    }
+    private void OnEnable()
+    {
+        GameManager.onStartGame += OnStartGame;
+        Barrier.onHit += OnHit;
+    }
+
+    private void OnHit()
+    {
+        //animator.SetTrigger("Hit");
+        animator.SetTrigger("Die");
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onStartGame -= OnStartGame;
+        Barrier.onHit -= OnHit;
+    }
+    private void OnStartGame()
+    {
+        isControlEnabled = true;
+        isPlayedDead = false;
+    }
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();

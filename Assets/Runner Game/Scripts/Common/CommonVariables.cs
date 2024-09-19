@@ -11,4 +11,10 @@ public static class CommonVariables
         Coin,
         CollectedParticle
     }
+    public enum PanelTypes
+    {
+        Start = 0,
+        Failed = 1,
+        Success = 2
+    }
 }
