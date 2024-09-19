@@ -5,9 +5,19 @@ using UnityEngine;
 
 public class Barrier : MonoBehaviour , IObstacle
 {
-    public static Action onHit;
+    #region Unity Fields
+    [SerializeField] private float damage;
+    #endregion
+    #region Events
+    public static Action<float> onHit;
+    #endregion
+
+    #region Fields
+    public float Damage { get => damage; set => damage = value; }
+    #endregion
+
     public void Hit()
     {
-        onHit?.Invoke();
+        onHit?.Invoke(Damage);
     }
 }

@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IObstacle 
 {
+    public float Damage {  get; set; }
     void Hit();
 }

@@ -17,4 +17,9 @@ public static class CommonVariables
         Failed = 1,
         Success = 2
     }
+    public enum PlayerAnimsTriggers
+    {
+        Hit,
+        Die
+    }
 }

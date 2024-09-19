@@ -15,39 +15,39 @@ public class Player : MonoBehaviour
     protected Animator animator;
     #endregion
 
-    #region Unity Methods
+    #region Unity Methods   
     protected virtual void Awake()
     {
         isControlEnabled = false;
         isPlayedDead = false;
     }
+    protected virtual void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
+    }
+
     private void OnEnable()
     {
         GameManager.onStartGame += OnStartGame;
-        Barrier.onHit += OnHit;
+        //Barrier.onHit += OnHit;
     }
-
-    private void OnHit()
-    {
-        //animator.SetTrigger("Hit");
-        animator.SetTrigger("Die");
-    }
-
     private void OnDisable()
     {
         GameManager.onStartGame -= OnStartGame;
-        Barrier.onHit -= OnHit;
+        //Barrier.onHit -= OnHit;
     }
+    #endregion
+    #region Privates
+    //private void OnHit(float damage)
+    //{
+    //    animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
+    //    animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Die.ToString());
+    //}
     private void OnStartGame()
     {
         isControlEnabled = true;
         isPlayedDead = false;
     }
-
-    protected virtual void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-    } 
     #endregion
 }

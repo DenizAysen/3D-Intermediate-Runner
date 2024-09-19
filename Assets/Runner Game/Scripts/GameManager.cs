@@ -10,9 +10,17 @@ public class GameManager : SingletonCreator<GameManager>
     [SerializeField] PanelBase[] panelBase;
     #endregion
     #region Actions
-    public static Action onStartGame; 
+    public static Action onStartGame;
     #endregion
     #region Unity Methods
+    private void OnEnable()
+    {
+        PlayerHealth.onPlayerDied += OnPlayerDied;
+    }
+    private void OnDisable()
+    {
+        PlayerHealth.onPlayerDied -= OnPlayerDied;
+    }
     private void Start()
     {
         SetPanel(CommonVariables.PanelTypes.Start);
@@ -31,6 +39,11 @@ public class GameManager : SingletonCreator<GameManager>
         {
             panel.gameObject.SetActive(false);
         }
+    }
+    private void OnPlayerDied()
+    {
+        SetPanel(CommonVariables.PanelTypes.Failed);
+        Debug.Log("Burasi calisti");
     }
     #endregion
     #region Public Methods
