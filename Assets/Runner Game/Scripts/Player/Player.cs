@@ -30,24 +30,39 @@ public class Player : MonoBehaviour
     private void OnEnable()
     {
         GameManager.onStartGame += OnStartGame;
-        //Barrier.onHit += OnHit;
+        ObstacleBase.onHit += OnHit;
+        PlayerHealth.onPlayerDied += OnPlayerDied;
+        PlayerCollector.onFinished += OnFinished;
     }
     private void OnDisable()
     {
         GameManager.onStartGame -= OnStartGame;
-        //Barrier.onHit -= OnHit;
+        ObstacleBase.onHit -= OnHit;
+        PlayerHealth.onPlayerDied -= OnPlayerDied;
+        PlayerCollector.onFinished -= OnFinished;
     }
     #endregion
     #region Privates
-    //private void OnHit(float damage)
-    //{
-    //    animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
-    //    animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Die.ToString());
-    //}
+    private void OnHit(float damage)
+    {
+        
+    }
     private void OnStartGame()
     {
         isControlEnabled = true;
         isPlayedDead = false;
+        animator.SetBool(CommonVariables.PlayerAnimBools.Run.ToString(), true);
+    }
+    private void OnPlayerDied()
+    {
+        isControlEnabled = false;
+        isPlayedDead = true;
+    }
+    private void OnFinished()
+    {
+        isControlEnabled = false;
+        //Debug.Log("Control enabled : " + isControlEnabled);
+        animator.SetBool(CommonVariables.PlayerAnimBools.Run.ToString(), false);
     }
     #endregion
 }

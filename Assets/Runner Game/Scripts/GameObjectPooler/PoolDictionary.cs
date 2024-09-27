@@ -45,11 +45,17 @@ public class PoolDictionary : MonoBehaviour
 		}
 
 		GameObject spawnedObj = poolDictionary[name].Dequeue();
+		if (spawnedObj == null) 
+		{
+			return null;
+		}
+
 		spawnedObj.SetActive(true);
         if (parent != null)
         {
 			spawnedObj.transform.SetParent(parent);
         }
+
 		spawnedObj.transform.position = position;
 		spawnedObj.transform.rotation = Quaternion.identity;	
 		poolDictionary[name].Enqueue(spawnedObj);

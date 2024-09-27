@@ -13,9 +13,8 @@ public class CreateGameObjects : SingletonCreator<CreateGameObjects>
     private Transform _destinationParentTransform;
     #endregion
     #region Unity Methods
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         StartPooling();
     }
     #endregion

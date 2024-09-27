@@ -1,23 +1,32 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrier : MonoBehaviour , IObstacle
+public class Barrier : ObstacleBase
 {
     #region Unity Fields
     [SerializeField] private float damage;
     #endregion
-    #region Events
-    public static Action<float> onHit;
-    #endregion
-
-    #region Fields
-    public float Damage { get => damage; set => damage = value; }
-    #endregion
-
-    public void Hit()
+    #region Unity Methods
+    protected override void Start()
     {
-        onHit?.Invoke(Damage);
+        base.Start();
+        Damage = damage;
+    }
+    #endregion
+    public override void Hit()
+    {
+        base.Hit();
+        float rotateDuration = .4f;
+        transform.DORotate(new Vector3(90, 0, 0), rotateDuration, RotateMode.Fast).OnComplete(() =>
+        {
+            float moveDuration = .4f;
+            transform.DOMoveY(-3f, moveDuration).OnComplete(() =>
+            {
+                objCollider.enabled = true;
+            });
+        });
     }
 }

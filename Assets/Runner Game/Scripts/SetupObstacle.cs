@@ -14,6 +14,6 @@ public class SetupObstacle : MonoBehaviour
         float duration = .1f;
         yield return new WaitForSeconds(duration);
 
-        createGameObjects.CreateGameObject("Barrier", Vector3.zero);
+       // createGameObjects.CreateGameObject("Barrier", Vector3.zero);
     }
 }

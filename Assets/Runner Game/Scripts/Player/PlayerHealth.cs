@@ -34,7 +34,6 @@ public class PlayerHealth : Player
 
         if (_currentHealth <= 0)
         {
-            animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
             animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Die.ToString());
             isControlEnabled = false;
             isPlayedDead = true;
@@ -43,6 +42,10 @@ public class PlayerHealth : Player
         else
             animator.SetTrigger(CommonVariables.PlayerAnimsTriggers.Hit.ToString());
 
-    }   
+    }
+    #endregion
+    #region Public Methods
+    public float GetMaxHealth() => maxHealth;
+    public float GetCurrentHealth() => _currentHealth;
     #endregion
 }

@@ -14,6 +14,7 @@ public class BarrierSpawner : MonoBehaviour
     [SerializeField] float pointZOffset;
     [Range(0f, 1f)]
     [SerializeField] float coinPercent;
+    [SerializeField] float coinYOffset = .3f;
     #endregion
     #region Fields
     private Vector3 _pos = Vector3.zero;
@@ -44,12 +45,15 @@ public class BarrierSpawner : MonoBehaviour
             }
             else
             {
-                CreateObject(SpawnedObjects.Coin);
+                CreateObject(SpawnedObjects.Coin, coinYOffset);
             }
         }
     }
-    private void CreateObject(SpawnedObjects spawnedObject)
+    private void CreateObject(SpawnedObjects spawnedObject , float yOffset = 0f)
     {
-        CreateGameObjects.Instance.CreateGameObject(spawnedObject.ToString(), spawnPoints[Random.Range(0, spawnPoints.Length)].position, null);
+        Vector3 objPos = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
+        objPos.y += yOffset;
+
+        CreateGameObjects.Instance.CreateGameObject(spawnedObject.ToString(), objPos , null);
     }
 }

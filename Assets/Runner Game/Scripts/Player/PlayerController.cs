@@ -21,7 +21,11 @@ public class PlayerController : Player
     private void FixedUpdate()
     {
         if (!isControlEnabled || isPlayedDead)
+        {
+            if(rb.velocity.magnitude != 0)
+                rb.velocity = Vector3.zero;
             return;
+        }
 
         _moveDirection.z = forwardSpeed * Time.fixedDeltaTime;
         _moveDirection.y = 0f;
